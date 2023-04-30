@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuxi.Andres.Test.Domain", "src\Yuxi.Andres.Test.Domain\Yuxi.Andres.Test.Domain.csproj", "{58B2BEF2-3147-48A3-9D2E-03AB01BFA80D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuxi.Andres.Test.Application", "src\Yuxi.Andres.Test.Application\Yuxi.Andres.Test.Application.csproj", "{2E79147E-916D-4673-9559-7436AC8B6C2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuxi.Andres.Test.Infrastructure", "src\Yuxi.Andres.Test.Infrastructure\Yuxi.Andres.Test.Infrastructure.csproj", "{E072DE18-4BCE-4E48-BB7C-4AF8B7D7CDC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuxi.Andres.Test.WebApi", "src\Yuxi.Andres.Test.WebApi\Yuxi.Andres.Test.WebApi.csproj", "{C5522582-5E2E-4016-B000-70F796E26D6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58B2BEF2-3147-48A3-9D2E-03AB01BFA80D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B2BEF2-3147-48A3-9D2E-03AB01BFA80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B2BEF2-3147-48A3-9D2E-03AB01BFA80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B2BEF2-3147-48A3-9D2E-03AB01BFA80D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E79147E-916D-4673-9559-7436AC8B6C2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E79147E-916D-4673-9559-7436AC8B6C2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E79147E-916D-4673-9559-7436AC8B6C2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E79147E-916D-4673-9559-7436AC8B6C2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E072DE18-4BCE-4E48-BB7C-4AF8B7D7CDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E072DE18-4BCE-4E48-BB7C-4AF8B7D7CDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E072DE18-4BCE-4E48-BB7C-4AF8B7D7CDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E072DE18-4BCE-4E48-BB7C-4AF8B7D7CDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5522582-5E2E-4016-B000-70F796E26D6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5522582-5E2E-4016-B000-70F796E26D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5522582-5E2E-4016-B000-70F796E26D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5522582-5E2E-4016-B000-70F796E26D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
