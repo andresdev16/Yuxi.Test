@@ -6,4 +6,32 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1701;1702;IL2121;CS8613</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Persistence\" />
+    <None Remove="Persistence\Migrations\" />
+    <None Remove="Persistence\Configurations\" />
+    <None Remove="Persistence\Queries\" />
+    <None Remove="Persistence\Repositories\" />
+    <None Remove="Persistence\Queries\Location\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+    <Folder Include="Persistence\Migrations\" />
+    <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Persistence\Queries\" />
+    <Folder Include="Persistence\Repositories\" />
+    <Folder Include="Persistence\Queries\Location\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yuxi.Andres.Test.Domain\Yuxi.Andres.Test.Domain.csproj" />
+    <ProjectReference Include="..\Yuxi.Andres.Test.Application\Yuxi.Andres.Test.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SharedKernel.Infrastructure" Version="7.0.3" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+  </ItemGroup>
 </Project>

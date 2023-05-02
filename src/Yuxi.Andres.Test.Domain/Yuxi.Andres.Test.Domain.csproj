@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SharedKernel.Domain" Version="7.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Aggregates\" />
+    <None Remove="Aggregates\Location\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Aggregates\" />
+    <Folder Include="Aggregates\Location\" />
+  </ItemGroup>
 </Project>
