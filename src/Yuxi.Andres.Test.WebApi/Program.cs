@@ -50,11 +50,8 @@ using (var scope = app.Services.CreateScope())
 
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseRouting();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
