@@ -7,7 +7,7 @@ using Yuxi.Andres.Test.Domain.Aggregates.Location;
 
 namespace Yuxi.Andres.Test.Infrastructure.Persistence.Queries
 {
-	internal class GetAllLocationHandler : IQueryRequestHandler<GetAllLocationsQuery, IEnumerable<Location>>
+	internal class GetAllLocationHandler : IQueryRequestHandler<GetAllLocationsQuery, IEnumerable<LocationAggregate>>
 	{
         private readonly EntityFrameworkCoreQueryProvider<TestContext> queryProvider;
 
@@ -16,9 +16,9 @@ namespace Yuxi.Andres.Test.Infrastructure.Persistence.Queries
             this.queryProvider = queryProvider;
 		}
 
-        public async Task<IEnumerable<Location>> Handle(GetAllLocationsQuery query, CancellationToken cancellationToken)
+        public async Task<IEnumerable<LocationAggregate>> Handle(GetAllLocationsQuery query, CancellationToken cancellationToken)
         {
-            return await queryProvider.GetQuery<Location>().Skip(query.offset).Take(query.limit).ToListAsync(cancellationToken);
+            return await queryProvider.GetQuery<LocationAggregate>().Skip(query.offset).Take(query.limit).ToListAsync(cancellationToken);
         }
     }
 }

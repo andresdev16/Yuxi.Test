@@ -21,7 +21,7 @@ namespace Yuxi.Andres.Test.Application.Commands.LocationCommands
 
         public async Task<Guid> HandleAsync(AddLocationCommand request, CancellationToken cancellationToken)
         {
-            var location = Location.Create(request.name, request.address, request.openDate, request.closeDate);
+            var location = LocationAggregate.Create(request.name, request.address, request.openDate, request.closeDate);
 
             locationRepository.Add(location);
 

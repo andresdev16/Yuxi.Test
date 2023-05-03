@@ -5,9 +5,9 @@ using Yuxi.Andres.Test.Domain.Aggregates.Location;
 
 namespace Yuxi.Andres.Test.Infrastructure.Persistence.Configurations
 {
-    internal class LocationConfiguration : IEntityTypeConfiguration<Location>
+    internal class LocationConfiguration : IEntityTypeConfiguration<LocationAggregate>
     {
-        public void Configure(EntityTypeBuilder<Location> builder)
+        public void Configure(EntityTypeBuilder<LocationAggregate> builder)
         {
             builder.HasKey(l => l.Id);
             builder.Property(l => l.Name);

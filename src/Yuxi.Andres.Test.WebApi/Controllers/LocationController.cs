@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SharedKernel.Application.Cqrs.Commands;
 using SharedKernel.Application.Cqrs.Queries;
 using Yuxi.Andres.Test.Application.Commands.LocationCommands;
@@ -29,7 +30,7 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
         [HttpGet("{id}")]
         [ActionName(nameof(GetLocationSummary))]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(Location), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(LocationAggregate), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetLocationSummary(Guid id, CancellationToken cancellationToken)
         {
@@ -41,6 +42,7 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
         }
 
         [HttpPost("add")]
+        [ActionName(nameof(AddLocation))]
         [Consumes(MediaTypeNames.Application.Json)]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
@@ -49,6 +51,28 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
             Guid id = await sender.SendAsync(command, cancellationToken);
 
             return Ok(id);
+        }
+
+        [HttpGet("all")]
+        [ActionName(nameof(GetLocations))]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetLocations([FromRoute] int offset, [FromRoute] int limit, CancellationToken cancellationToken)
+        {
+            var locations = await queries.Ask(new GetAllLocationsQuery(offset, limit), cancellationToken);
+
+            return Ok(JsonConvert.SerializeObject(locations));
+        }
+
+        [HttpGet("all/get-by-date/")]
+        [ActionName(nameof(GetLocationsByDate))]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetLocationsByDate([FromRoute] int offset, [FromRoute] int limit, [FromBody] DateTimeOffset openDate, [FromBody] DateTimeOffset closeDate, CancellationToken cancellationToken)
+        {
+            var locations = await queries.Ask(new GetLocationsByDateQuery(offset, limit, openDate, closeDate), cancellationToken);
+
+            return Ok(JsonConvert.SerializeObject(locations));
         }
     }
 }
