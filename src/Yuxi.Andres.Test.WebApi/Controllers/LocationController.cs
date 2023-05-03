@@ -14,7 +14,7 @@ using Yuxi.Andres.Test.Domain.Aggregates.Location;
 
 namespace Yuxi.Andres.Test.WebApi.Controllers
 {
-    [Route("/")]
+    [Route("api/[controller]")]
     [ApiController]
     public class LocationController : Controller
     {
