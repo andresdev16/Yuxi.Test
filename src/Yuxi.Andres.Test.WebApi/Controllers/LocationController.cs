@@ -11,8 +11,6 @@ using Yuxi.Andres.Test.Application.Commands.LocationCommands;
 using Yuxi.Andres.Test.Application.Queries.LocationQueries;
 using Yuxi.Andres.Test.Domain.Aggregates.Location;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Yuxi.Andres.Test.WebApi.Controllers
 {
     [Route("api/[controller]")]
