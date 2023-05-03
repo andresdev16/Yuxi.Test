@@ -6,7 +6,7 @@ using Yuxi.Andres.Test.Domain.Aggregates.Location;
 
 namespace Yuxi.Andres.Test.Application.Commands.LocationCommands
 {
-    public record AddLocationCommand(string name, string address, DateTimeOffset openDate, DateTimeOffset closeDate) : IRequest<Guid>;
+    public record AddLocationCommand(string name, string address, DateTime openDate, DateTime closeDate) : IRequest<Guid>;
 
     public class AddLocationCommandHandler : IRequestHandler<AddLocationCommand, Guid>
     {

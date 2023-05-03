@@ -7,10 +7,10 @@ namespace Yuxi.Andres.Test.Domain.Aggregates.Location
 	{
 		public string Name { get; set; }
 		public string Address { get; set; }
-		public DateTimeOffset OpenDate { get; set; }
-		public DateTimeOffset CloseDate { get; set; }
+		public DateTime OpenDate { get; set; }
+		public DateTime CloseDate { get; set; }
 
-		private LocationAggregate(string name, string address, DateTimeOffset openDate, DateTimeOffset closeDate)
+		private LocationAggregate(string name, string address, DateTime openDate, DateTime closeDate)
 		{
 			Name = name;
 			Address = address;
@@ -18,7 +18,7 @@ namespace Yuxi.Andres.Test.Domain.Aggregates.Location
 			CloseDate = closeDate;
 		}
 
-		public static LocationAggregate Create(string name, string address, DateTimeOffset openDate, DateTimeOffset closeDate)
+		public static LocationAggregate Create(string name, string address, DateTime openDate, DateTime closeDate)
 		{
 			var location = new LocationAggregate(name, address, openDate, closeDate);
 

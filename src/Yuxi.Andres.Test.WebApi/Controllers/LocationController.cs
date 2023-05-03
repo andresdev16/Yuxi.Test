@@ -53,7 +53,7 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
             return Ok(id);
         }
 
-        [HttpGet("all")]
+        [HttpGet("all/{offset:int}:{limit:int}")]
         [ActionName(nameof(GetLocations))]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -61,10 +61,10 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
         {
             var locations = await queries.Ask(new GetAllLocationsQuery(offset, limit), cancellationToken);
 
-            return Ok(JsonConvert.SerializeObject(locations));
+            return Ok(locations);
         }
 
-        [HttpGet()]
+        [HttpGet("get-by-date/{offset:int}:{limit:int}:{openDate:datetime}:{closeDate:datetime}")]
         [ActionName(nameof(GetLocationsByDate))]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -72,7 +72,7 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
         {
             var locations = await queries.Ask(new GetLocationsByDateQuery(offset, limit, openDate, closeDate), cancellationToken);
 
-            return Ok(JsonConvert.SerializeObject(locations));
+            return Ok(locations);
         }
     }
 }
