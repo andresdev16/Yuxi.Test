@@ -11,7 +11,6 @@ using SharedKernel.Application.Cqrs.Queries;
 using Yuxi.Andres.Test.Application.Commands.LocationCommands;
 using Yuxi.Andres.Test.Application.Queries.LocationQueries;
 using Yuxi.Andres.Test.Domain.Aggregates.Location;
-using Yuxi.Andres.Test.WebApi.Dtos;
 
 namespace Yuxi.Andres.Test.WebApi.Controllers
 {
