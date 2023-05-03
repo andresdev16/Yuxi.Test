@@ -37,8 +37,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controllers\" />
+    <None Remove="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
 </Project>
