@@ -57,18 +57,18 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
         [ActionName(nameof(GetLocations))]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetLocations([FromRoute] int offset, [FromRoute] int limit, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetLocations(int offset, int limit, CancellationToken cancellationToken)
         {
             var locations = await queries.Ask(new GetAllLocationsQuery(offset, limit), cancellationToken);
 
             return Ok(JsonConvert.SerializeObject(locations));
         }
 
-        [HttpGet("get-by-date")]
+        [HttpGet()]
         [ActionName(nameof(GetLocationsByDate))]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetLocationsByDate(int offset, int limit, DateTimeOffset openDate, DateTimeOffset closeDate, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetLocationsByDate(int offset, int limit, DateTime openDate, DateTime closeDate, CancellationToken cancellationToken)
         {
             var locations = await queries.Ask(new GetLocationsByDateQuery(offset, limit, openDate, closeDate), cancellationToken);
 
