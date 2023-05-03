@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SharedKernel.Api.ServiceCollectionExtensions;
+using SharedKernel.Infrastructure;
 using SharedKernel.Infrastructure.Caching;
 using SharedKernel.Infrastructure.Cqrs.Commands;
 using SharedKernel.Infrastructure.Cqrs.Queries;
@@ -9,7 +10,7 @@ using Yuxi.Andres.Test.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
-string connectionString = builder.Configuration.GetConnectionString("TestConnectionSqlServer");
+var connectionString = builder.Configuration.GetConnectionString("TestConnectionSqlServer") ?? "";
 
 // Add services to the container.
 
@@ -19,14 +20,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //configure kernel services
+builder.Services.AddSharedKernel();
 builder.Services.AddInMemoryCommandBus();
 builder.Services.AddInMemoryQueryBus();
 builder.Services.AddInMemoryCache();
-builder.Services.AddCore(builder.Configuration, connectionString);
+builder.Services.AddCore(builder.Configuration, "TestConnectionSqlServer");
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Yuxi.Andres.Test.WebApi", Version = "v1" }));
-builder.Services.AddDbContext<TestContext>();
+builder.Services.AddDbContext<TestContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
@@ -38,6 +40,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         context.Database.SetConnectionString(connectionString);
+        context.Database.OpenConnection();
         context.Database.Migrate();
     }
     catch (Exception ex)
@@ -54,7 +57,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-app.UseAuthorization();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.UseSharedKernelMetrics();
