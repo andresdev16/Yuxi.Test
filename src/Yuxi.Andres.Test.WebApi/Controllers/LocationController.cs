@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SharedKernel.Application.Cqrs.Commands;
@@ -84,6 +86,42 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
             var locations = await queries.Ask(new GetLocationsAvailablesQuery(offset, limit), cancellationToken);
 
             return Ok(locations);
+        }
+
+        [HttpPost("add/file")]
+        [ActionName(nameof(ImportLocations))]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> ImportLocations([FromForm] IFormFile file, CancellationToken cancellationToken)
+        {
+            if (file is null || file.Length == 0)
+            {
+                return BadRequest("The file was not uploaded or is empty");
+            }
+
+            using var reader = new StreamReader(file.OpenReadStream());
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+            var locations = csv.GetRecords<LocationAggregate>();
+
+            List<Guid> newLocations = new List<Guid>();
+
+            try
+            {
+                foreach (LocationAggregate location in locations)
+                {
+                    var command = new AddLocationCommand(location.Name, location.Address, location.OpenDate, location.CloseDate);
+                    Guid createdLocation = await sender.SendAsync(command, cancellationToken);
+                    newLocations.Add(createdLocation);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+
+            return Ok(newLocations);
         }
     }
 }
