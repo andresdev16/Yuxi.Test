@@ -74,6 +74,17 @@ namespace Yuxi.Andres.Test.WebApi.Controllers
 
             return Ok(locations);
         }
+
+        [HttpGet("availables-by-hour/{offset:int}:{limit:int}")]
+        [ActionName(nameof(GetLocationsByHour))]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetLocationsByHour(int offset, int limit, CancellationToken cancellationToken)
+        {
+            var locations = await queries.Ask(new GetLocationsAvailablesQuery(offset, limit), cancellationToken);
+
+            return Ok(locations);
+        }
     }
 }
 

@@ -19,7 +19,7 @@ namespace Yuxi.Andres.Test.Infrastructure.Persistence.Queries.Location
         public async Task<IEnumerable<LocationAggregate>> Handle(GetLocationsByDateQuery query, CancellationToken cancellationToken)
         {
 			return await queryProvider.GetQuery<LocationAggregate>()
-				.Where(l => l.OpenDate.Hour >= query.openDate.Hour && l.CloseDate.Hour <= query.closeDate.Hour)
+				.Where(l => l.OpenDate >= query.openDate && l.CloseDate <= query.closeDate)
 				.Skip(query.offset)
 				.Take(query.limit)
 				.ToListAsync();
